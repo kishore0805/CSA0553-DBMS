@@ -1,0 +1,80 @@
+mysql> create database education;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> create table student(regno int(3),name varchar(15),gender varchar(1),dob int(7),mobileno int(10),city varchar(15));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int(3)      | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | int(7)      | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| city     | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> create table faculty(facno varchar(4),facname varchar(15),gender varchar(1),dob int(7),doj int(7),mobile no int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'no int(10))' at line 1
+mysql> create table faculty(facno varchar(4),facname varchar(15),gender varchar(1),dob int(7),doj int(7),mobileno int(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | int(7)      | YES  |     | NULL    |       |
+| doj      | int(7)      | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.05 sec)
+
+mysql> create table department(deptno int(9),deptname varchar(15),depthead varchar(4));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| deptno   | int(9)      | YES  |     | NULL    |       |
+| deptname | varchar(15) | YES  |     | NULL    |       |
+| depthead | varchar(4)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> create table course(courseno int(7),coursedesc varchar(14),coursetype varchar(1),semno varchar(1),hallno int(10),facno int(10)
+);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table faculty add deptno varchar(4);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc  faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | int(7)      | YES  |     | NULL    |       |
+| doj      | int(7)      | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| deptno   | varchar(4)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> drop table department;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc department;
+ERROR 1146 (42S02): Table 'education.department' doesn't exist
+mysql>
