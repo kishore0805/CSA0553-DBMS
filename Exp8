@@ -1,0 +1,73 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.02 sec)
+
+mysql> use education;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_education |
++---------------------+
+| faculty             |
+| student             |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select*from student;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select regno,name from student where IN(select name from student where section='A');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN(select name from student where section='A')' at line 1
+mysql> select regno,name from student where in(select name from student where section='A');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in(select name from student where section='A')' at line 1
+mysql> select regno,name from student where name in(select name from student where section='A');
++---------+---------+
+| regno   | name    |
++---------+---------+
+| 1999111 | King    |
+| 1999444 | Warrior |
++---------+---------+
+2 rows in set (0.04 sec)
+
+mysql> create table student1(regno int(33),name varchar(44));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into student1 values(1999111,'King'),(1999333,'Prince');
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from student1;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999111 | King   |
+| 1999333 | Prince |
++---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select regno,(select name from student1 where id = 1999111)as name,dept,marks,section from student where regno=1999111;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> select regno,(select name from student1 where regno = 1999111)as name,dept,marks,section from student where regno=1999111;
++---------+------+------+-------+---------+
+| regno   | name | dept | marks | section |
++---------+------+------+-------+---------+
+| 1999111 | King | ECE  |    88 | A       |
++---------+------+------+-------+---------+
+1 row in set (0.00 sec)
