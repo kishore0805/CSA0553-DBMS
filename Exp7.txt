@@ -1,0 +1,76 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_education |
++---------------------+
+| faculty             |
+| student             |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student order by name;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999444 | Warrior  | IT   |   100 | A       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student group by section;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student having marks>85;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student having marks<85;
++---------+--------+------+-------+---------+
+| regno   | name   | dept | marks | section |
++---------+--------+------+-------+---------+
+| 1999222 | Queen  | CSE  |    65 | B       |
+| 1999333 | Prince | BME  |    76 | C       |
++---------+--------+------+-------+---------+
+2 rows in set (0.00 sec)
