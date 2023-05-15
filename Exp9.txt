@@ -1,0 +1,122 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_education |
++---------------------+
+| faculty             |
+| student             |
+| student1            |
++---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from student1;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999111 | King   |
+| 1999333 | Prince |
++---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.regno from student cross join student2;
+ERROR 1146 (42S02): Table 'education.student2' doesn't exist
+mysql> select student.regno,student1.regno from student cross join student1;
++---------+---------+
+| regno   | regno   |
++---------+---------+
+| 1999111 | 1999111 |
+| 1999111 | 1999333 |
+| 1999222 | 1999111 |
+| 1999222 | 1999333 |
+| 1999333 | 1999111 |
+| 1999333 | 1999333 |
+| 1999444 | 1999111 |
+| 1999444 | 1999333 |
+| 1999555 | 1999111 |
+| 1999555 | 1999333 |
++---------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.name from student cross join student1;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999111 | King   |
+| 1999111 | Prince |
+| 1999222 | King   |
+| 1999222 | Prince |
+| 1999333 | King   |
+| 1999333 | Prince |
+| 1999444 | King   |
+| 1999444 | Prince |
+| 1999555 | King   |
+| 1999555 | Prince |
++---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.regno from student inner join student1 on student.regno=student1.regno;
++---------+---------+
+| regno   | regno   |
++---------+---------+
+| 1999111 | 1999111 |
+| 1999333 | 1999333 |
++---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.regno from student inner join student1 on student.regno=student1.name;
+Empty set (0.01 sec)
+
+mysql> select student.regno,student1.name from student inner join student1 on student.regno=student1.regno;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999111 | King   |
+| 1999333 | Prince |
++---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.name from student left join student1 on student.regno=student1.regno order by student1.regno;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999444 | NULL   |
+| 1999555 | NULL   |
+| 1999222 | NULL   |
+| 1999111 | King   |
+| 1999333 | Prince |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select student.regno,student1.name from student right join student1 on student.regno=student1.regno order by student1.regno;
++---------+--------+
+| regno   | name   |
++---------+--------+
+| 1999111 | King   |
+| 1999333 | Prince |
++---------+--------+
+2 rows in set (0.00 sec)
