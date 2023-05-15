@@ -1,0 +1,91 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> create table student(regno int(44),name varchar(88),dept varchar(88),marks int(44),section varchar(44));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| regno   | int(44)     | YES  |     | NULL    |       |
+| name    | varchar(88) | YES  |     | NULL    |       |
+| dept    | varchar(88) | YES  |     | NULL    |       |
+| marks   | int(44)     | YES  |     | NULL    |       |
+| section | varchar(44) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> create table faculty(id int(44),name varchar(88),dept varchar(88),points int(44),section varchar(44));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc faculty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(44)     | YES  |     | NULL    |       |
+| name    | varchar(88) | YES  |     | NULL    |       |
+| dept    | varchar(88) | YES  |     | NULL    |       |
+| points  | int(44)     | YES  |     | NULL    |       |
+| section | varchar(44) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> alter table student add primary key (regno);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| regno   | int(44)     | NO   | PRI | 0       |       |
+| name    | varchar(88) | YES  |     | NULL    |       |
+| dept    | varchar(88) | YES  |     | NULL    |       |
+| marks   | int(44)     | YES  |     | NULL    |       |
+| section | varchar(44) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> alter table faculty add foreign key(id) references student (regno);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(44)     | YES  | MUL | NULL    |       |
+| name    | varchar(88) | YES  |     | NULL    |       |
+| dept    | varchar(88) | YES  |     | NULL    |       |
+| points  | int(44)     | YES  |     | NULL    |       |
+| section | varchar(44) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> alter table student add unique (name);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| regno   | int(44)     | NO   | PRI | 0       |       |
+| name    | varchar(88) | YES  | UNI | NULL    |       |
+| dept    | varchar(88) | YES  |     | NULL    |       |
+| marks   | int(44)     | YES  |     | NULL    |       |
+| section | varchar(44) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.07 sec)
