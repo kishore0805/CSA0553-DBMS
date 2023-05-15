@@ -1,0 +1,95 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_education |
++---------------------+
+| faculty             |
+| student             |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from student where section between 'A' and 'B';
++---------+---------+------+-------+---------+
+| regno   | name    | dept | marks | section |
++---------+---------+------+-------+---------+
+| 1999111 | King    | ECE  |    88 | A       |
+| 1999222 | Queen   | CSE  |    65 | B       |
+| 1999444 | Warrior | IT   |   100 | A       |
++---------+---------+------+-------+---------+
+3 rows in set (0.05 sec)
+
+mysql> select*from student where dept in('ECE');
++---------+------+------+-------+---------+
+| regno   | name | dept | marks | section |
++---------+------+------+-------+---------+
+| 1999111 | King | ECE  |    88 | A       |
++---------+------+------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select*from student where where section not between 'A' and 'B';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where section not between 'A' and 'B'' at line 1
+mysql> select*from student where section not between 'A' and 'B';
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from student where section='A';
++------------+
+| sum(marks) |
++------------+
+|        188 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) as average from student;
++---------+
+| average |
++---------+
+| 83.6000 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) as minimum from student;
++---------+
+| minimum |
++---------+
+|      65 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) as maximum from student;
++---------+
+| maximum |
++---------+
+|     100 |
++---------+
+1 row in set (0.00 sec)
