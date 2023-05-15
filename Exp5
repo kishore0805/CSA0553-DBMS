@@ -1,0 +1,86 @@
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| education          |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use education;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_education |
++---------------------+
+| faculty             |
+| student             |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select*from student;
++---------+---------+------+-------+---------+
+| regno   | name    | dept | marks | section |
++---------+---------+------+-------+---------+
+| 1999111 | King    | ECE  |    88 | A       |
+| 1999333 | Prince  | BME  |    76 | C       |
+| 1999444 | Warrior | IT   |   100 | A       |
++---------+---------+------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student values(1999222,'Queen','CSE',65,'B');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(1999555,'Minister','EEE',89,'D');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999111 | King     | ECE  |    88 | A       |
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999444 | Warrior  | IT   |   100 | A       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where section='A';
++---------+---------+------+-------+---------+
+| regno   | name    | dept | marks | section |
++---------+---------+------+-------+---------+
+| 1999111 | King    | ECE  |    88 | A       |
+| 1999444 | Warrior | IT   |   100 | A       |
++---------+---------+------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select*from student where name like 'W%';
++---------+---------+------+-------+---------+
+| regno   | name    | dept | marks | section |
++---------+---------+------+-------+---------+
+| 1999444 | Warrior | IT   |   100 | A       |
++---------+---------+------+-------+---------+
+1 row in set (0.04 sec)
+
+mysql> select*from student where name like '%e%';
++---------+----------+------+-------+---------+
+| regno   | name     | dept | marks | section |
++---------+----------+------+-------+---------+
+| 1999222 | Queen    | CSE  |    65 | B       |
+| 1999333 | Prince   | BME  |    76 | C       |
+| 1999555 | Minister | EEE  |    89 | D       |
++---------+----------+------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student where name like 'P___c_';
++---------+--------+------+-------+---------+
+| regno   | name   | dept | marks | section |
++---------+--------+------+-------+---------+
+| 1999333 | Prince | BME  |    76 | C       |
++---------+--------+------+-------+---------+
+1 row in set (0.00 sec)
